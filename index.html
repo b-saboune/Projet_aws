@@ -1,111 +1,191 @@
 <!DOCTYPE html>
 <html lang="fr" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculatrice Moderne Avancée</title>
-    <!-- Use basic SEO tags -->
-    <meta name="description" content="Calculatrice web moderne avec design glassmorphism, mode sombre et fonctions scientifiques.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Calculatrice Moderne & Graphique</title>
+    <meta name="description"
+        content="Calculatrice web moderne avec design glassmorphism, mode sombre, fonctions scientifiques, graphiques et équations.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for graph rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+    <div class="background-anim">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
     <div class="app-container">
-        <!-- History panel -->
-        <div class="history-panel hidden" id="historyPanel">
-            <div class="history-header">
-                <h3>Historique</h3>
-                <button id="clearHistoryBtn" class="icon-btn" title="Vider l'historique">
-                    <i class="fa-solid fa-trash"></i>
+        <!-- left side panel: History -->
+        <div class="side-panel history-panel hidden" id="historyPanel">
+            <div class="panel-header">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Historique</h3>
+                <button id="clearHistoryBtn" class="icon-btn" title="Vider">
+                    <i class="fa-solid fa-trash-can"></i>
                 </button>
             </div>
             <ul id="historyList" class="history-list">
-                <!-- History items will be injected here -->
+                <!-- Injected via JS -->
             </ul>
         </div>
 
-        <!-- Calculator main container -->
-        <main class="calculator glass">
+        <!-- Center Calculator -->
+        <main class="calculator glass-panel">
             <header class="top-bar">
-                <button id="themeToggle" class="icon-btn" title="Changer de thème">
-                    <i class="fa-solid fa-sun" id="themeIcon"></i>
-                </button>
-                <button id="historyToggle" class="icon-btn" title="Historique">
-                    <i class="fa-solid fa-clock-rotate-left"></i>
+                <div class="left-controls">
+                    <button id="historyToggle" class="icon-btn tooltip" data-tooltip="Historique">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </button>
+                    <button id="graphToggle" class="icon-btn tooltip" data-tooltip="Mode Graphique">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </button>
+                    <button id="eqToggle" class="icon-btn tooltip" data-tooltip="Équations">
+                        <i class="fa-solid fa-superscript"></i>
+                    </button>
+                </div>
+                <button id="themeToggle" class="icon-btn tooltip" data-tooltip="Changer le thème">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
                 </button>
             </header>
-            
-            <section class="display" aria-live="polite">
-                <div class="previous-operand" id="previousOperand"></div>
-                <div class="current-operand" id="currentOperand">0</div>
+
+            <section class="display-wrapper">
+                <div class="display">
+                    <div class="previous-operand" id="previousOperand"></div>
+                    <div class="current-operand" id="currentOperand">0</div>
+                </div>
             </section>
 
-            <section class="memory-keys" aria-label="Memory keys">
-                <button class="mem-btn" data-action="mc">MC</button>
-                <button class="mem-btn" data-action="mr">MR</button>
-                <button class="mem-btn" data-action="m-minus">M-</button>
-                <button class="mem-btn" data-action="m-plus">M+</button>
+            <section class="memory-keys gradient-borders">
+                <button class="mem-btn ripple-fx" data-action="mc">MC</button>
+                <button class="mem-btn ripple-fx" data-action="mr">MR</button>
+                <button class="mem-btn ripple-fx" data-action="m-minus">M-</button>
+                <button class="mem-btn ripple-fx" data-action="m-plus">M+</button>
             </section>
 
             <section class="keypad">
                 <div class="keypad-grid basic-grid">
                     <!-- Top operations -->
-                    <button class="btn action highlight" data-action="clear" aria-label="Clear All">AC</button>
-                    <button class="btn action" data-action="delete" aria-label="Delete">⌫</button>
-                    <button class="btn action" data-action="percent" aria-label="Percentage">%</button>
-                    <button class="btn operator" data-operator="÷" aria-label="Divide">÷</button>
+                    <button class="btn action clear highlight ripple-fx" data-action="clear">AC</button>
+                    <button class="btn action ripple-fx" data-action="delete">⌫</button>
+                    <button class="btn action ripple-fx" data-action="percent">%</button>
+                    <button class="btn operator ripple-fx" data-operator="÷">÷</button>
 
                     <!-- Numbers & Basic Ops -->
-                    <button class="btn number" data-value="7">7</button>
-                    <button class="btn number" data-value="8">8</button>
-                    <button class="btn number" data-value="9">9</button>
-                    <button class="btn operator" data-operator="×" aria-label="Multiply">×</button>
+                    <button class="btn number ripple-fx" data-value="7">7</button>
+                    <button class="btn number ripple-fx" data-value="8">8</button>
+                    <button class="btn number ripple-fx" data-value="9">9</button>
+                    <button class="btn operator ripple-fx" data-operator="×">×</button>
 
-                    <button class="btn number" data-value="4">4</button>
-                    <button class="btn number" data-value="5">5</button>
-                    <button class="btn number" data-value="6">6</button>
-                    <button class="btn operator" data-operator="−" aria-label="Subtract">−</button>
+                    <button class="btn number ripple-fx" data-value="4">4</button>
+                    <button class="btn number ripple-fx" data-value="5">5</button>
+                    <button class="btn number ripple-fx" data-value="6">6</button>
+                    <button class="btn operator ripple-fx" data-operator="−">−</button>
 
-                    <button class="btn number" data-value="1">1</button>
-                    <button class="btn number" data-value="2">2</button>
-                    <button class="btn number" data-value="3">3</button>
-                    <button class="btn operator" data-operator="+" aria-label="Add">+</button>
+                    <button class="btn number ripple-fx" data-value="1">1</button>
+                    <button class="btn number ripple-fx" data-value="2">2</button>
+                    <button class="btn number ripple-fx" data-value="3">3</button>
+                    <button class="btn operator ripple-fx" data-operator="+">+</button>
 
-                    <button class="btn number span-2" data-value="0">0</button>
-                    <button class="btn number" data-value=".">.</button>
-                    <button class="btn operator equals" data-action="calculate" aria-label="Calculate">=</button>
+                    <button class="btn number span-2 ripple-fx" data-value="0">0</button>
+                    <button class="btn number ripple-fx" data-value=".">.</button>
+                    <button class="btn operator equals ripple-fx" data-action="calculate">=</button>
                 </div>
-                
-                <!-- Expanded Scientific Grid (Toggleable) -->
+
+                <!-- Expanded Scientific Grid -->
                 <div class="scientific-panel hidden" id="scientificPanel">
-                    <button class="btn sci" data-action="sqrt" aria-label="Square Root">√</button>
-                    <button class="btn sci" data-action="square" aria-label="Square">x²</button>
-                    <button class="btn sci" data-action="power" aria-label="Power">xʸ</button>
-                    <button class="btn sci" data-action="log" aria-label="Logarithm">log</button>
-                    
-                    <button class="btn sci" data-action="ln" aria-label="Natural Logarithm">ln</button>
-                    <button class="btn sci" data-action="sin" aria-label="Sine">sin</button>
-                    <button class="btn sci" data-action="cos" aria-label="Cosine">cos</button>
-                    <button class="btn sci" data-action="tan" aria-label="Tangent">tan</button>
-                    
-                    <button class="btn sci" data-action="pi" aria-label="Pi">π</button>
-                    <button class="btn sci" data-action="e" aria-label="Euler's number">e</button>
-                    <button class="btn sci" data-action="fact" aria-label="Factorial">!</button>
-                    <button class="btn sci" data-action="toggle-angle" id="angleModeBtn">DEG</button>
-                    
-                    <button class="btn sci" data-action="paren-left" aria-label="Left Parenthesis">(</button>
-                    <button class="btn sci" data-action="paren-right" aria-label="Right Parenthesis">)</button>
+                    <button class="btn sci ripple-fx" data-action="sqrt">√</button>
+                    <button class="btn sci ripple-fx" data-action="square">x²</button>
+                    <button class="btn sci ripple-fx" data-action="power">xʸ</button>
+                    <button class="btn sci ripple-fx" data-action="log">log</button>
+
+                    <button class="btn sci ripple-fx" data-action="ln">ln</button>
+                    <button class="btn sci ripple-fx" data-action="sin">sin</button>
+                    <button class="btn sci ripple-fx" data-action="cos">cos</button>
+                    <button class="btn sci ripple-fx" data-action="tan">tan</button>
+
+                    <button class="btn sci ripple-fx" data-action="pi">π</button>
+                    <button class="btn sci ripple-fx" data-action="e">e</button>
+                    <button class="btn sci ripple-fx" data-action="fact">!</button>
+                    <button class="btn sci ripple-fx" data-action="toggle-angle" id="angleModeBtn">DEG</button>
+
+                    <!-- Advanced ops: Parenthesis not implemented visually perfectly yet, but adding UI -->
+                    <button class="btn sci ripple-fx" data-action="paren-left">(</button>
+                    <button class="btn sci ripple-fx" data-action="paren-right">)</button>
                 </div>
             </section>
-            
-            <button id="sciToggleBtn" class="sci-toggle" aria-expanded="false">
-                <i class="fa-solid fa-chevron-down" id="sciToggleIcon"></i> Scientifique
+
+            <button id="sciToggleBtn" class="drawer-toggle">
+                <i class="fa-solid fa-chevron-down" id="sciToggleIcon"></i> <span>Scientifique</span>
             </button>
         </main>
+
+        <!-- Right Side Panel: Features (Graphing & Equations) -->
+        <div class="side-panel feature-panel hidden glass-panel" id="featurePanel">
+            <!-- Tabs -->
+            <div class="tab-header">
+                <button class="tab-btn active" data-tab="graphTab"><i class="fa-solid fa-chart-pie"></i>
+                    Graphique</button>
+                <button class="tab-btn" data-tab="eqTab"><i class="fa-solid fa-square-root-variable"></i>
+                    Équations</button>
+                <button id="closeFeatureBtn" class="icon-btn float-right"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="tab-content-area">
+                <!-- Graphing Tab -->
+                <div class="tab-pane active" id="graphTab">
+                    <p class="helper-text">Tracez une courbe mathématique f(x) :</p>
+                    <div class="input-group">
+                        <span class="prefix">f(x) =</span>
+                        <input type="text" id="graphFunction" placeholder="ex: Math.sin(x) ou x*x">
+                    </div>
+                    <div class="ranges">
+                        <div class="input-mini">
+                            <label>X Min</label>
+                            <input type="number" id="xMin" value="-10">
+                        </div>
+                        <div class="input-mini">
+                            <label>X Max</label>
+                            <input type="number" id="xMax" value="10">
+                        </div>
+                    </div>
+                    <button id="drawGraphBtn" class="primary-btn ripple-fx">Tracer la courbe</button>
+
+                    <div class="canvas-container">
+                        <canvas id="graphCanvas"></canvas>
+                    </div>
+                    <p class="error-msg" id="graphError"></p>
+                </div>
+
+                <!-- Equation Solver Tab -->
+                <div class="tab-pane hidden" id="eqTab">
+                    <p class="helper-text">Résolution d'équation du second degré <b>ax² + bx + c = 0</b> :</p>
+                    <div class="eq-inputs">
+                        <div class="eq-group">
+                            <input type="number" id="eqA" placeholder="a"> <span class="eq-text">x² +</span>
+                        </div>
+                        <div class="eq-group">
+                            <input type="number" id="eqB" placeholder="b"> <span class="eq-text">x +</span>
+                        </div>
+                        <div class="eq-group">
+                            <input type="number" id="eqC" placeholder="c"> <span class="eq-text">= 0</span>
+                        </div>
+                    </div>
+                    <button id="solveEqBtn" class="primary-btn ripple-fx mt-3">Résoudre</button>
+
+                    <div class="solution-box hidden" id="solutionBox"></div>
+                    <p class="error-msg" id="eqError"></p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- JS script attached at the end -->
     <script src="js/script.js"></script>
 </body>
+
 </html>
