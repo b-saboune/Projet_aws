@@ -1,0 +1,249 @@
+📘 CAHIER DES CHARGES
+Projet : Calculatrice Web Moderne Avancée
+1. Contexte et objectif du projet
+
+Le projet consiste à développer une application web de calculatrice moderne, avec :
+
+Une interface ultra moderne et minimaliste
+
+Des animations fluides
+
+Des fonctionnalités avancées
+
+Une expérience utilisateur (UX) intuitive
+
+Un design responsive (desktop + mobile)
+
+L’application sera développée uniquement avec :
+
+HTML5 (structure)
+
+CSS3 (design, animations)
+
+JavaScript (ES6+) (logique métier)
+
+2. Objectifs principaux
+🎯 Objectif général
+
+Créer une calculatrice web esthétique, performante et riche en fonctionnalités avancées.
+
+🎯 Objectifs spécifiques
+
+Interface moderne inspirée des UI Apple / Material Design
+
+Animations fluides (micro-interactions)
+
+Mode sombre / clair dynamique
+
+Calculs scientifiques avancés
+
+Historique des opérations
+
+Responsive design
+
+Effets visuels modernes (glassmorphism / neumorphism)
+
+3. Fonctionnalités attendues
+3.1 Fonctionnalités de base
+
+Addition (+)
+
+Soustraction (−)
+
+Multiplication (×)
+
+Division (÷)
+
+Pourcentage (%)
+
+Suppression caractère (⌫)
+
+Reset (AC)
+
+Gestion des décimales
+
+Gestion des erreurs (division par zéro)
+
+3.2 Fonctionnalités avancées
+🔬 Mode scientifique
+
+Racine carrée (√)
+
+Puissance (xʸ)
+
+Carré (x²)
+
+Logarithme (log)
+
+Log népérien (ln)
+
+Sin, Cos, Tan
+
+Factorielle (!)
+
+Constantes (π, e)
+
+Parenthèses ()
+
+🧠 Fonctionnalités intelligentes
+
+Historique des calculs
+
+Copie du résultat
+
+Mode angle (degré/radian)
+
+Calcul en temps réel
+
+Gestion des grandes valeurs
+
+Mémoire (M+, M-, MR, MC)
+
+🎨 Fonctionnalités UX modernes
+
+Mode sombre / clair
+
+Thèmes personnalisables
+
+Animations sur clic
+
+Effet ripple sur bouton
+
+Transitions fluides
+
+Sons désactivables
+
+Calculatrice draggable (optionnel)
+
+4. Exigences techniques
+4.1 Architecture technique
+
+Structure recommandée :
+
+/calculator
+│
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── script.js
+└── assets/
+4.2 Contraintes techniques
+
+JavaScript Vanilla (pas de framework)
+
+CSS moderne (Flexbox / Grid)
+
+Variables CSS
+
+Transitions & animations CSS
+
+Code structuré et modulaire
+
+Bonne gestion des événements
+
+Code orienté objet recommandé
+
+5. Design et Interface (UI/UX)
+5.1 Style visuel
+
+Style recommandé :
+
+Glassmorphism
+
+Neumorphism
+
+Effet blur background
+
+Ombres douces
+
+Coins arrondis (border-radius 20px+)
+
+Palette moderne :
+
+Noir profond (#121212)
+
+Gris doux (#1E1E1E)
+
+Accent néon (bleu, violet ou vert)
+
+5.2 Animation et interactions
+Animations obligatoires
+
+Animation au survol des boutons
+
+Animation au clic (scale 0.95)
+
+Transition fluide écran
+
+Apparition douce du résultat
+
+Animation de changement de thème
+
+Effet de frappe digitale
+
+5.3 Responsive Design
+
+Mobile first
+
+Largeur adaptable
+
+Boutons optimisés tactile
+
+Adaptation tablette / desktop
+
+Support orientation paysage
+
+6. Expérience Utilisateur (UX)
+Critères UX
+
+Interface claire
+
+Boutons bien espacés
+
+Résultat bien visible
+
+Hiérarchie visuelle
+
+Temps de réponse instantané
+
+Gestion des erreurs intuitive
+
+7. Sécurité et Performance
+
+Validation des entrées utilisateur
+
+Éviter l’usage direct de eval()
+
+Gestion propre des erreurs
+
+Optimisation du rendu CSS
+
+Code JS performant
+
+8. Planning estimatif
+Phase	Durée
+Analyse & design	2 jours
+Maquette UI	2 jours
+Développement base	3 jours
+Fonctionnalités avancées	4 jours
+Animations & UX	2 jours
+Tests & optimisation	2 jours
+
+Total estimé : 15 jours
+
+9. Critères de validation
+
+Le projet sera validé si :
+
+Toutes les opérations fonctionnent correctement
+
+Le design est moderne et fluide
+
+Les animations sont présentes
+
+Le site est responsive
+
+Le code est structuré
+
+Les erreurs sont bien gérées
