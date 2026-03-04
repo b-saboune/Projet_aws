@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice Moderne Avancée</title>
+    <!-- Use basic SEO tags -->
+    <meta name="description" content="Calculatrice web moderne avec design glassmorphism, mode sombre et fonctions scientifiques.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- History panel -->
+        <div class="history-panel hidden" id="historyPanel">
+            <div class="history-header">
+                <h3>Historique</h3>
+                <button id="clearHistoryBtn" class="icon-btn" title="Vider l'historique">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+            <ul id="historyList" class="history-list">
+                <!-- History items will be injected here -->
+            </ul>
+        </div>
+
+        <!-- Calculator main container -->
+        <main class="calculator glass">
+            <header class="top-bar">
+                <button id="themeToggle" class="icon-btn" title="Changer de thème">
+                    <i class="fa-solid fa-sun" id="themeIcon"></i>
+                </button>
+                <button id="historyToggle" class="icon-btn" title="Historique">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </button>
+            </header>
+            
+            <section class="display" aria-live="polite">
+                <div class="previous-operand" id="previousOperand"></div>
+                <div class="current-operand" id="currentOperand">0</div>
+            </section>
+
+            <section class="memory-keys" aria-label="Memory keys">
+                <button class="mem-btn" data-action="mc">MC</button>
+                <button class="mem-btn" data-action="mr">MR</button>
+                <button class="mem-btn" data-action="m-minus">M-</button>
+                <button class="mem-btn" data-action="m-plus">M+</button>
+            </section>
+
+            <section class="keypad">
+                <div class="keypad-grid basic-grid">
+                    <!-- Top operations -->
+                    <button class="btn action highlight" data-action="clear" aria-label="Clear All">AC</button>
+                    <button class="btn action" data-action="delete" aria-label="Delete">⌫</button>
+                    <button class="btn action" data-action="percent" aria-label="Percentage">%</button>
+                    <button class="btn operator" data-operator="÷" aria-label="Divide">÷</button>
+
+                    <!-- Numbers & Basic Ops -->
+                    <button class="btn number" data-value="7">7</button>
+                    <button class="btn number" data-value="8">8</button>
+                    <button class="btn number" data-value="9">9</button>
+                    <button class="btn operator" data-operator="×" aria-label="Multiply">×</button>
+
+                    <button class="btn number" data-value="4">4</button>
+                    <button class="btn number" data-value="5">5</button>
+                    <button class="btn number" data-value="6">6</button>
+                    <button class="btn operator" data-operator="−" aria-label="Subtract">−</button>
+
+                    <button class="btn number" data-value="1">1</button>
+                    <button class="btn number" data-value="2">2</button>
+                    <button class="btn number" data-value="3">3</button>
+                    <button class="btn operator" data-operator="+" aria-label="Add">+</button>
+
+                    <button class="btn number span-2" data-value="0">0</button>
+                    <button class="btn number" data-value=".">.</button>
+                    <button class="btn operator equals" data-action="calculate" aria-label="Calculate">=</button>
+                </div>
+                
+                <!-- Expanded Scientific Grid (Toggleable) -->
+                <div class="scientific-panel hidden" id="scientificPanel">
+                    <button class="btn sci" data-action="sqrt" aria-label="Square Root">√</button>
+                    <button class="btn sci" data-action="square" aria-label="Square">x²</button>
+                    <button class="btn sci" data-action="power" aria-label="Power">xʸ</button>
+                    <button class="btn sci" data-action="log" aria-label="Logarithm">log</button>
+                    
+                    <button class="btn sci" data-action="ln" aria-label="Natural Logarithm">ln</button>
+                    <button class="btn sci" data-action="sin" aria-label="Sine">sin</button>
+                    <button class="btn sci" data-action="cos" aria-label="Cosine">cos</button>
+                    <button class="btn sci" data-action="tan" aria-label="Tangent">tan</button>
+                    
+                    <button class="btn sci" data-action="pi" aria-label="Pi">π</button>
+                    <button class="btn sci" data-action="e" aria-label="Euler's number">e</button>
+                    <button class="btn sci" data-action="fact" aria-label="Factorial">!</button>
+                    <button class="btn sci" data-action="toggle-angle" id="angleModeBtn">DEG</button>
+                    
+                    <button class="btn sci" data-action="paren-left" aria-label="Left Parenthesis">(</button>
+                    <button class="btn sci" data-action="paren-right" aria-label="Right Parenthesis">)</button>
+                </div>
+            </section>
+            
+            <button id="sciToggleBtn" class="sci-toggle" aria-expanded="false">
+                <i class="fa-solid fa-chevron-down" id="sciToggleIcon"></i> Scientifique
+            </button>
+        </main>
+    </div>
+
+    <!-- JS script attached at the end -->
+    <script src="js/script.js"></script>
+</body>
+</html>
